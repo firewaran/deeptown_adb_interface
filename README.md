@@ -43,6 +43,8 @@ These are the commands that are currently supported.
 You can start the mto get an explanation.
 
 A brief summuary:
+File | Description
+---- | ----
 select_action | This handles the actions the drones can execute.
 select_bot | Will select a bot and abort its current task.
 select_building | Used the mine buildings from the menu accessable in the first underground floor.
