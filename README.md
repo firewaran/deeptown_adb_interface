@@ -1,3 +1,5 @@
+german version: README_DE.md
+
 # DeepTown ADB interface
 
 DeepTown is a moblie game by RockBite.
@@ -33,14 +35,13 @@ Currently only one setup is predefined:
 
 ### bot_tasker.cmd
 
-Once you setup the load_env.cmd you can use this "application" to send the bots
-on predefines tasks including collecting oil and water.
+Once you setup the load_env.cmd you can use this "application" to send the drones on predefines tasks including collecting oil and water.
 The script will run until you stop it manually. 
 
 ### select_*.bat
 
 These are the commands that are currently supported.
-You can start the mto get an explanation.
+You can start the savely get an explanation.
 
 A brief summuary:
 File | Description
