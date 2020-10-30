@@ -1,0 +1,34 @@
+#    ------------------ START OF DOCUMENTATION -------------------------
+#    this document list the current location of (chem.)-mines
+#    and also the new position you want to have them.
+#    if it is a chemical mine you can specify the a ressource
+#    -------------------------------------------------------------------
+#    Format of this document:
+#    Columns as seperated by TAB
+#        Commen: either - (data) or # (comment)
+#        Level of mine OR "c": normal mines: level 1-9, chemical mines: c
+#        area of mine: current level/area of the mine
+#        new area of mine: new level/area of the mine
+#        search: silicon  sulfur   sodium  nitrogen
+#                silizium schwefel natrium stickstoff
+#    Data:
+#        make sure the numbers do not contain leading,trailing spaces/zeros
+#        if new and old area are the same the mine will not be moved.
+#    ------------------ END OF DOCUMENTATION -------------------------
+#    Add or remove lines according to the mines you have.
+-	c	4	4	sulfur
+-	c	7	7	sulfur
+-	c	8	8	sulfur
+-	c	12	12	sulfur
+-	c	15	15	sulfur
+-	c	16	16	sulfur
+-	c	17	17	sodium
+-	c	20	20	sodium
+-	c	23	23	silicon
+-	c	24	24	silicon
+-	c	26	26	sodium
+-	c	29	29	sodium
+-	c	50	50	sodium
+-	c	96	96	sodium
+-	c	108	108	sodium
+-	c	109	109	sodium
