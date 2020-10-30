@@ -1,4 +1,4 @@
-german version: README_DE.md
+german version: [README_DE.md](https://github.com/firewaran/deeptown_adb_interface/blob/main/README_DE.md)
 
 # DeepTown ADB interface
 
