@@ -1,7 +1,7 @@
 @echo off
 cls
 setlocal EnableDelayedExpansion
-set script_home="%CD%\"
+set script_home="%CD%"
 
 echo.
 echo +------------------------------------+
@@ -56,16 +56,16 @@ for /f "usebackq tokens=1,2,3,4,5 delims=	" %%a in (%minesLoc%) do (
 	if "!oldPos!" EQU "!newPos!" (
 	  REM echo Skip. Mine does not change position.
 	) else (
-	  call %script_home%select_floor.cmd %funcRelocate% !curFloor! !oldPos!
-	  call %script_home%select_func.cmd %funcMove%
-	  call %script_home%select_floor.cmd %funcRelocate% !curFloor! !newPos!	  
-	  call %script_home%select_func.cmd %funcMove%
+	  call %script_home%\select_floor.cmd %funcRelocate% !curFloor! !oldPos!
+	  call %script_home%\select_func.cmd %funcMove%
+	  call %script_home%\select_floor.cmd %funcRelocate% !curFloor! !newPos!	  
+	  call %script_home%\select_func.cmd %funcMove%
 	)
 	if "%%b" EQU "c" (
 	  if "%%e" NEQ "" (
-	    call %script_home%select_floor.cmd %funcRelocate% !curFloor! !newPos!
-	    call %script_home%select_func.cmd %funcSearch%
-	    call %script_home%select_chem_search.cmd !ressource!
+	    call %script_home%\select_floor.cmd %funcRelocate% !curFloor! !newPos!
+	    call %script_home%\select_func.cmd %funcSearch%
+	    call %script_home%\select_chem_search.cmd !ressource!
 		set "ressource="
 	  )
 	)
@@ -73,7 +73,7 @@ for /f "usebackq tokens=1,2,3,4,5 delims=	" %%a in (%minesLoc%) do (
   )
 )
 if !curFloor! NEQ 0 (
-  call %script_home%select_floor.cmd %funcBase% !curFloor!
+  call %script_home%\select_floor.cmd %funcBase% !curFloor!
 )
 
 del %minesLoc%
@@ -126,5 +126,5 @@ goto :EOF
   REM +=================================================+
   %script_home:~1,2%
   cd \
-  cd %script_home%
+  cd %script_home%\
 goto :EOF

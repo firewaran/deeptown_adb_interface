@@ -15,6 +15,8 @@ The scripts help to manage
 * Installed ADB client
 For ADB client setup i recommend this [article](https://www.xda-developers.com/install-adb-windows-macos-linux/) on [xda-developers.com](https://www.xda-developers.com/)
 
+In case you need a specific version of ADB replace the version no in the link to download the version: https://dl.google.com/android/repository/platform-tools_r27.0.0-windows.zip
+
 * Connected Android Tablet or Phone 
 Connected android device.
 
@@ -64,7 +66,8 @@ These files are only examples, you need to edit them with your current mine spot
 
 When you done that just drag your file over the arrange_mines.cmd to execute it with that setting.
 
-### testing.cmd
-
-used for internal testing of the different *.cmd-files
-
+### other files
+File | Description
+---- | ----
+testing.cmd | used for internal testing of the different *.cmd-files
+update_env.cmd | internally used to update the load_env.cmd

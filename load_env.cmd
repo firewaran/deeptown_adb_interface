@@ -11,11 +11,6 @@ REM I folder where the adb.exe is located
 REM I ordner in dem die adb.exe sich befindet
 REM +================================================================+
 set adb_home="%appdata%\..\local\android\sdk\platform-tools\"
-REM +================================================================+
-REM I Adjust only if you have multiple devices/emulators connected at the same time.
-REM I Nur anpassen wenn mehrere geraete/emulatoren zur gleichen Zeit verbunden sind.
-REM +================================================================+
-set transport_id=1
 REM
 REM +================================================================+
 REM I FLOORS: the in-gmae floor number
@@ -132,7 +127,9 @@ set action3="tap 670 1790"
 set action4="tap 970 1790"
 REM +================================================================+
 REM I DRONES: Actions entries.
+REM I         The naming and position applicable when all tasks are learned.
 REM I DROHNEN/BOTS: Faehigkeiteneintraege
+REM I         Namensgebung und Position wenn alle Aufgaben gelern wurden.
 REM +================================================================+
 REM I  FIRST PAGE:
 set collect_tap="tap 500 670"
@@ -192,6 +189,19 @@ REM
 REM
 :continue
 REM +================================================================+
+REM I Adjust only if you have multiple devices/emulators connected at the same time.
+REM I Nur anpassen wenn mehrere geraete/emulatoren zur gleichen Zeit verbunden sind.
+REM +================================================================+
+set transport_id=1
+REM
+REM
+REM
+REM
+REM
+REM
+REM
+REM
+REM +================================================================+
 REM I Internal options, it should not be necessary to do changes here.
 REM I Interne Optionen, es sollte nicht noetig sein aenderungen vorzunehmen.
 REM +================================================================+
@@ -205,7 +215,7 @@ REM
 REM
 REM
 REM
-set touchscreen="".\adb.exe -t %transport_id% shell input touchscreen""
+set touchscreen="".\adb.exe -t %transport_id% shell input""
 set timeout=""timeout /t 1 ^> nul""
 REM
 if "%dtadb_lang%" NEQ "DE" (

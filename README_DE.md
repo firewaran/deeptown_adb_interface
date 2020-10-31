@@ -13,6 +13,8 @@ Die Skripte helfen bei der Verwaltung von
 * Installieren eines ADB-Clients
 Für die Einrichtung des ADB-Clients empfehle ich diesen [Artikel](https://www.xda-developers.com/install-adb-windows-macos-linux/) auf [xda-developers.com](https://www.xda-developers.com/)
 
+Für den Fall das Sie eine bestimmte ADB Version benötigen, verwenden sie folgenden link und paasen sie die Version an: https://dl.google.com/android/repository/platform-tools_r27.0.0-windows.zip
+
 * Angeschlossenes Android-Tablet oder Telefon 
 Angeschlossenes Android-Gerät.
 
@@ -62,6 +64,8 @@ Diese Dateien sind nur Beispiele, Sie müssen sie mit Ihren aktuellen Minenspots
 
 Wenn Sie das getan haben, ziehen Sie einfach Ihre Datei über die Datei arrange_mines.cmd, um sie mit dieser Einstellung auszuführen.
 
-### testing.cmd
-
-für interne Tests der verschiedenen *.cmd-Dateien verwendet
+### other files
+File | Beschreibung
+---- | ----
+testing.cmd | für interne Tests der verschiedenen *.cmd-Dateien verwendet
+update_env.cmd | intern verwendet zum aktualisieren der load_env.cmd

@@ -1,6 +1,6 @@
 @echo off
 setlocal EnableDelayedExpansion
-set script_home="%CD%\"
+set script_home="%CD%"
 
 :start
 cls
@@ -58,10 +58,10 @@ goto :EOF
 echo **************** select action
 set func1=search
 set param1=silicon sulfur sodium nitrogen
-call %script_home%select_floor.cmd underground 0
-call %script_home%select_building.cmd chemi 1
+call %script_home%\select_floor.cmd underground 0
+call %script_home%\select_building.cmd chemi 1
 call :test_select_chem_search
-call %script_home%select_floor.cmd base %curFloor%
+call %script_home%\select_floor.cmd base %curFloor%
 
 echo please rate the result, then press any key to continue
 pause > nul
@@ -71,10 +71,10 @@ goto :EOF
 echo **************** waehle aktionen
 set func1=suchen
 set param1=silizium schwefel natrium stickstoff
-call %script_home%select_floor.cmd untergrund 0
-call %script_home%select_building.cmd chemi 1
+call %script_home%\select_floor.cmd untergrund 0
+call %script_home%\select_building.cmd chemi 1
 call :test_select_chem_search
-call %script_home%select_floor.cmd basis %curFloor%
+call %script_home%\select_floor.cmd basis %curFloor%
 
 echo bitte beurteile das Ergebnis, anschliessend mit druecken beliebieger Taste fortsetzen.
 pause > nul
@@ -82,8 +82,8 @@ pause > nul
 goto :EOF
 :test_select_chem_search
   for %%a in (%param1%) do (
-	call %script_home%select_func.cmd %func1%
-	call %script_home%select_chem_search.cmd %%a
+	call %script_home%\select_func.cmd %func1%
+	call %script_home%\select_chem_search.cmd %%a
   )
 
 goto :EOF
@@ -93,7 +93,7 @@ REM +--------------------------------------------+
 set func1=actions
 set func2=mine
 
-call %script_home%select_floor.cmd dronebay 0
+call %script_home%\select_floor.cmd dronebay 0
 
 set param1="obsidian" "titanium skip" "helium skip" "amber" "amethyst skip" "ruby skip" "gold" "diamond skip"
 call :test_select_ress
@@ -107,7 +107,7 @@ pause > nul
 
 set param1="uranium skip" "emerald skip" "sapphire"
 call :test_select_ress
-call %script_home%select_floor.cmd base %curFloor%
+call %script_home%\select_floor.cmd base %curFloor%
 
 echo please verify bots assignment, then press any key to continue
 pause > nul
@@ -118,7 +118,7 @@ echo **************** waehle rohstoff
 REM +--------------------------------------------+
 set func1=aktionen
 set func2=abbauen
-call %script_home%select_floor.cmd drohnenbucht 0
+call %script_home%\select_floor.cmd drohnenbucht 0
 
 set param1="obsidian" "titanerz skip" "helium skip" "bernstein" "amethyst skip" "rubin skip" "gold" "diamant skip"
 call :test_select_ress
@@ -132,7 +132,7 @@ pause > nul
 
 set param1="uran skip" "smaragd skip" "saphir"
 call :test_select_ress
-call %script_home%select_floor.cmd base %curFloor%
+call %script_home%\select_floor.cmd base %curFloor%
 
 echo bitte pruefe die Bots ob sie die Aufgaben erledigen, anschliessend mit druecken beliebieger Taste fortsetzen.
 pause > nul
@@ -154,10 +154,10 @@ goto :EOF
 	  if !i! EQU 2 set skip=%%b
 	  set /A i+=1
 	)
-    call %script_home%select_bot.cmd !bot!
-	call %script_home%select_func.cmd %func1%
-	call %script_home%select_action.cmd %func2% 
-    call %script_home%select_ress.cmd !ress! !skip!
+    call %script_home%\select_bot.cmd !bot!
+	call %script_home%\select_func.cmd %func1%
+	call %script_home%\select_action.cmd %func2% 
+    call %script_home%\select_ress.cmd !ress! !skip!
 	set /A bot+=1
   )  
 
@@ -166,9 +166,9 @@ goto :EOF
 echo **************** select action
 set func1=actions
 set param1=collect smelt craft garden water oil jewel chemi
-call %script_home%select_floor.cmd dronebay 0
+call %script_home%\select_floor.cmd dronebay 0
 call :test_select_action
-call %script_home%select_floor.cmd base %curFloor%
+call %script_home%\select_floor.cmd base %curFloor%
 
 echo please verify bots assignment and position back on Area 0, then press any key to continue
 pause > nul
@@ -177,9 +177,9 @@ pause > nul
 echo **************** waehle aktionen
 set func1=aktionen
 set param1=sammeln schmelzen handwerk gartenbau wasser oel juwelen chemi
-call %script_home%select_floor.cmd drohnenbucht 0
+call %script_home%\select_floor.cmd drohnenbucht 0
 call :test_select_action
-call %script_home%select_floor.cmd basis %curFloor%
+call %script_home%\select_floor.cmd basis %curFloor%
 
 echo bitte pruefe die Bots ob sie die Aufgaben erledigen und wieder auf Ebene 0 fukusieren, anschliessend mit druecken beliebieger Taste fortsetzen.
 pause > nul
@@ -188,9 +188,9 @@ goto :EOF
 :test_select_action
   set bot=1
   for %%a in (%param1%) do (
-    call %script_home%select_bot.cmd !bot!
-	call %script_home%select_func.cmd %func1%
-	call %script_home%select_action.cmd %%a
+    call %script_home%\select_bot.cmd !bot!
+	call %script_home%\select_func.cmd %func1%
+	call %script_home%\select_action.cmd %%a
 	set /A bot+=1
   )
 
@@ -198,9 +198,9 @@ goto :EOF
 :select_bot_en
 echo **************** select drone
 set param1=1 2 3 4 5 6 7 8 9
-call %script_home%select_floor.cmd dronebay 0
+call %script_home%\select_floor.cmd dronebay 0
 call :test_select_bot
-call %script_home%select_floor.cmd base %curFloor%
+call %script_home%\select_floor.cmd base %curFloor%
 
 echo please verify drones are idling and position back on Area 0, then press any key to continue
 pause > nul
@@ -209,9 +209,9 @@ goto :EOF
 :select_bot_de
 echo **************** waehle drohne
 set param1=1 2 3 4 5 6 7 8 9
-call %script_home%select_floor.cmd drohnenbucht 0
+call %script_home%\select_floor.cmd drohnenbucht 0
 call :test_select_bot
-call %script_home%select_floor.cmd basis %curFloor%
+call %script_home%\select_floor.cmd basis %curFloor%
 
 echo bitte pruefe das die Drohnen keine Aufgaben erledigen und kehre auf Ebene 0 zurueck, anschliessend mit druecken beliebieger Taste fortsetzen.
 pause > nul
@@ -219,7 +219,7 @@ pause > nul
 goto :EOF
 :test_select_bot
   for %%a in (%param1%) do (
-    call %script_home%select_bot.cmd %%a
+    call %script_home%\select_bot.cmd %%a
   )
 
 goto :EOF
@@ -261,13 +261,13 @@ pause > nul
 goto :EOF
 :test_select_floor
   for %%a in (%param1%) do (
-    call %script_home%select_floor.cmd %%a !curFloor!
+    call %script_home%\select_floor.cmd %%a !curFloor!
   )
   
 goto :EOF
 :test_select_floor_relocate
   for %%a in (%param3%) do (
-    call %script_home%select_floor.cmd %func1% !curFloor! %%a
+    call %script_home%\select_floor.cmd %func1% !curFloor! %%a
   )
 
 goto :EOF
@@ -275,9 +275,9 @@ goto :EOF
 echo **************** select building
 set param1=oil
 set param2=1 2
-call %script_home%select_floor.cmd underground 0
+call %script_home%\select_floor.cmd underground 0
 call :test_select_building
-call %script_home%select_floor.cmd base %curFloor%
+call %script_home%\select_floor.cmd base %curFloor%
 
 echo check results, then press any key to continue
 pause > nul
@@ -287,9 +287,9 @@ goto :EOF
 echo **************** waehle gebaude
 set param1=oel
 set param2=1 2
-call %script_home%select_floor.cmd untergrund 0
+call %script_home%\select_floor.cmd untergrund 0
 call :test_select_building
-call %script_home%select_floor.cmd basis %curFloor%
+call %script_home%\select_floor.cmd basis %curFloor%
 
 echo bitte pruefe die ergebnise, anschliessend beliebige Taste druecken.
 pause > nul
@@ -298,7 +298,7 @@ goto :EOF
 :test_select_building
   for %%a in (%param1%) do (
     for %%b in (%param2%) do (
-	  call %script_home%select_building.cmd %%a %%b
+	  call %script_home%\select_building.cmd %%a %%b
 	)    
   )
 
@@ -308,35 +308,5 @@ REM +--------------------------------------------+
 goto :EOF
 :switch_language
   echo ---------------- loading test environment [%newLang%] -----------------
-  set config=.\load_env.cmd
-  set update=false
-  
-  FOR %%i IN (%config%) do (
-    set config_LocNew="%%~dpi\load_env_.cmd"
-    set config_filename=%%~nxi
-  )
-  if EXIST %config_LocNew% (
-    del %config_LocNew%
-  )
-  
-  REM Read through the file
-  for /f "usebackq eol=; delims=µ" %%a in (%config%) do ( 
-  REM analyze each line
-   set update=false
-   for %%b in (%%a) do (
-  REM search foo a keyword   
-     if "%%b" EQU "dtadb_lang" (
-       set update=true
-     )
-   )
-  REM if keyword was found alter write process
-   if "!update!" EQU "true" (
-     echo set dtadb_lang=%newLang%>> %config_LocNew%
-   ) else (
-     echo %%a>> %config_LocNew%
-   )
-  )
-  
-  del %config%
-  ren %config_LocNew% %config_filename%
+  call update_env.cmd %script_home%\load_env.cmd dtadb_lang %newLang%
 goto :EOF

@@ -1,9 +1,7 @@
 @echo off
 cls
 setlocal EnableDelayedExpansion
-set script_home="%CD%\"
-
-REM Setup ADB interface: https://www.xda-developers.com/install-adb-windows-macos-linux/
+set script_home="%CD%"
 
 :start
   echo.
@@ -15,9 +13,12 @@ REM Setup ADB interface: https://www.xda-developers.com/install-adb-windows-maco
   adb devices -l
   call :restore_home
 
-  call :lng_device_warning_%dtadb_lang%
-  PAUSE > nul
-  cls
+  call :lng_device_selection_%dtadb_lang%
+  if %transport_id% EQU "" (
+    goto :start
+  ) else (
+    call update_env.cmd %script_home%\load_env.cmd transport_id %transport_id%
+  )  
 
 :menu
   call :lng_main_menu_%dtadb_lang%
@@ -25,7 +26,7 @@ REM Setup ADB interface: https://www.xda-developers.com/install-adb-windows-maco
   if errorlevel 1 (
     echo.
     call :lng_wrong_input_%dtadb_lang%
-    goto :start
+    goto :menu
   )
 
 goto :end
@@ -67,7 +68,7 @@ goto :end
   goto :EOF
 :choice7
   call :ready7
-  call %script_home%arrange_mines.cmd
+  call %script_home%\arrange_mines.cmd mines_mixed.txt
   goto :menu
 :choicee
   goto :end
@@ -122,6 +123,7 @@ REM but pre-prepared it looks unfinished if english words pop up in an DE enviro
 	set move3=move3
 	set base=base
   )
+  call :get_collect_bot
   call :calc_cycle  
 :task24hloop
   REM +=================================================+
@@ -130,31 +132,34 @@ REM but pre-prepared it looks unfinished if english words pop up in an DE enviro
   REM I  .. then return to water collector and claim 4h
   REM I  .. return to base and restart.
   REM +=================================================+
-  call %script_home%select_floor.cmd %water% 0
-  call %script_home%select_func.cmd %claim%
-  call %script_home%select_floor.cmd %underground% %curFloor%
-  call %script_home%select_building.cmd %oil% 1
-  call %script_home%select_func.cmd %claim%
-  call %script_home%select_building.cmd %oil% 2
-  call %script_home%select_func.cmd %claim%
-  call %script_home%select_floor.cmd %dronebay% %curFloor%
-  call %script_home%select_bot.cmd 1
-  call %script_home%select_func.cmd %actions%
-  call %script_home%select_action.cmd %collect%
-  FOR /L %%b IN (2,1,8) DO (
-    call %script_home%select_bot.cmd %%b
-    call %script_home%select_func.cmd %actions%
-    call %script_home%select_action.cmd %choice%
+  call %script_home%\select_floor.cmd %water% 0
+  call %script_home%\select_func.cmd %claim%
+  call %script_home%\select_floor.cmd %underground% %curFloor%
+  call %script_home%\select_building.cmd %oil% 1
+  call %script_home%\select_func.cmd %claim%
+  call %script_home%\select_building.cmd %oil% 2
+  call %script_home%\select_func.cmd %claim%
+  call %script_home%\select_floor.cmd %dronebay% %curFloor%
+  FOR /L %%b IN (1,1,8) DO (
+    if %%b EQU %collecor_bot% (
+      call %script_home%\select_bot.cmd %collecor_bot%
+      call %script_home%\select_func.cmd %actions%
+      call %script_home%\select_action.cmd %collect%  	
+	) else (
+      call %script_home%\select_bot.cmd %%b
+      call %script_home%\select_func.cmd %actions%
+      call %script_home%\select_action.cmd %choice%	
+	)
   )
-  call %script_home%select_floor.cmd %water% %curFloor%
-  call %script_home%select_func.cmd %move3%
+  call %script_home%\select_floor.cmd %water% %curFloor%
+  call %script_home%\select_func.cmd %move3%
   FOR /L %%b IN (1,1,%cycle%) DO (
-    call %script_home%select_func.cmd %claim%
+    call %script_home%\select_func.cmd %claim%
 	set b=%%b
 	call :lng_cycle_progress_%dtadb_lang%
     timeout /t 900
   )
-  call %script_home%select_floor.cmd %base% %curFloor%
+  call %script_home%\select_floor.cmd %base% %curFloor%
   GOTO :task24hloop
 
 goto :end
@@ -184,6 +189,7 @@ REM but pre-prepared it looks unfinished if english words pop up in an DE enviro
 	set base=base
 	set mine=mine
   )
+  call :get_collect_bot
   call :calc_cycle  
   call :lng_select_resource_%dtadb_lang%
 :mine24hloop
@@ -193,52 +199,58 @@ REM but pre-prepared it looks unfinished if english words pop up in an DE enviro
   REM I  .. then return to water collector and claim 3h
   REM I  .. return to base and restart.
   REM +=================================================+
-  call %script_home%select_floor.cmd %water% 0
-  call %script_home%select_func.cmd %claim%
-  call %script_home%select_floor.cmd %underground% %curFloor%
-  call %script_home%select_building.cmd %oil% 1
-  call %script_home%select_func.cmd %claim%
-  call %script_home%select_building.cmd %oil% 2
-  call %script_home%select_func.cmd %claim%
-  call %script_home%select_floor.cmd %dronebay% %curFloor%
-  call %script_home%select_bot.cmd 1
-  call %script_home%select_func.cmd %actions%
-  call %script_home%select_action.cmd %collect%
-  call %script_home%select_bot.cmd 2
-  call %script_home%select_func.cmd %actions%
-  call %script_home%select_action.cmd %mine%
-  call %script_home%select_ress.cmd %choice%
-  FOR /L %%b IN (3,1,8) DO (
-    call %script_home%select_bot.cmd %%b
-    call %script_home%select_func.cmd %actions%
-    call %script_home%select_action.cmd %mine%
-    call %script_home%select_ress.cmd %choice% skip
+  call %script_home%\select_floor.cmd %water% 0
+  call %script_home%\select_func.cmd %claim%
+  call %script_home%\select_floor.cmd %underground% %curFloor%
+  call %script_home%\select_building.cmd %oil% 1
+  call %script_home%\select_func.cmd %claim%
+  call %script_home%\select_building.cmd %oil% 2
+  call %script_home%\select_func.cmd %claim%
+  call %script_home%\select_floor.cmd %dronebay% %curFloor%
+  set "skipWord="
+  FOR /L %%b IN (1,1,8) DO (
+    if %%b EQU %collecor_bot% (
+      call %script_home%\select_bot.cmd %collecor_bot%
+      call %script_home%\select_func.cmd %actions%
+      call %script_home%\select_action.cmd %collect%  	
+	) else (
+      call %script_home%\select_bot.cmd %%b
+      call %script_home%\select_func.cmd %actions%
+      call %script_home%\select_action.cmd %mine%
+      call %script_home%\select_ress.cmd %choice% !skipWord!
+	  set skipWord=skip	
+	)
   )
-  call %script_home%select_floor.cmd water %curFloor%
-  call %script_home%select_func.cmd %move3%
+  call %script_home%\select_floor.cmd water %curFloor%
+  call %script_home%\select_func.cmd %move3%
   FOR /L %%b IN (1,1,%cycle%) DO (
-    call %script_home%select_func.cmd %claim%
+    call %script_home%\select_func.cmd %claim%
 	set b=%%b
 	call :lng_cycle_progress_%dtadb_lang%
     timeout /t 900
   )
-  call %script_home%select_floor.cmd %base% %curFloor%
+  call %script_home%\select_floor.cmd %base% %curFloor%
   GOTO :mine24hloop
+
+goto :EOF
+:get_collect_bot
+  echo.
+  if "%dtadb_lang%" EQU "DE" (
+    set /P collecor_bot=Welche Drone soll fuer das sammeln der Ressourcen zustaendig sein:
+  ) else (
+    set /P collecor_bot=Which bot is the one to do the collect-task:
+  )
 
 goto :EOF
 REM +==================================================+
 REM I MESSAGES AND TRANSLATION
 REM +==================================================+
 REM    ....i....1....i....2....i....3....i....4....i....5....i....6....i....7....i....8
-:lng_device_warning_EN
-  echo Should you have more than one device connected make sure to enter the desired
-  echo transport-id in load_env.cmd.
-  echo continue by press any key
+:lng_device_selection_EN
+  set /P transport_id=Which device you want to connect to [transport-id]:
 goto :EOF
-:lng_device_warning_DE
-  echo Falls mehr als ein Geraet aufgelistet wird stelle bitte sicher das die
-  echo gewuenschte transport-id in der load_env.cmd eingetragen ist.
-  echo weiter mit beliebiger taste
+:lng_device_selection_DE
+  set /P transport_id=Zu welchem Geraet moechtest Du Dich verbinden [transport-id]:
 goto :EOF
 :lng_main_menu_EN
   echo +====================================+
@@ -344,7 +356,7 @@ REM +==================================================+
   REM +=================================================+
   %script_home:~1,2%
   cd \
-  cd %script_home%
+  cd %script_home%\
 goto :EOF
 :end
   call :restore_home
