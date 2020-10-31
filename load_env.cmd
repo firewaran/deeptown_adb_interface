@@ -41,7 +41,8 @@ REM +================================================================+
 REM I Predefines Setups          ; put/remove REM at the beginning to enable/disable
 REM I Vorgefertige Einstellungen ; setzen/entf. REM am beginn einer Zeile zum aktivieren/deaktivieren.
 REM +================================================================+
-goto :1080x1920_420
+goto :720x1280
+rem goto :1080x1920_420
 REM
 REM
 REM
@@ -182,6 +183,148 @@ set swipe_down="swipe 500 1205 500 670"
 set swipe_mine_resource_up="swipe 530 990 530 690"
 set swipe_mine_resource_down="swipe 530 710 530 990"
 REM
+goto :continue
+:720x1280
+REM +================================================================+
+REM I IMPORTANT: COORDINATES ARE FOR DEVICES WITH 1080x1920 (420dpi)
+REM I            YOU MUST UPDATE THEM IF YOU HAVE A DIFFERENT DISPLAY
+REM I WICHTIG:   KOORDINATION BEI EINER AUFLOESUNG VON 1080x1920 (420dpi)
+REM I            DU MUSST DIE WERTE ANPASSEN WENN DEIN DISPLAY ABWEICHT.
+REM +================================================================+
+REM
+REM +================================================================+
+REM I FORMAT = "tap X Y"
+REM I   to get X and Y coordinates activate developer settings in
+REM I   android and activate "pointer-location".
+REM I   then you will see the coordinates if you tap and hold a
+REM I   a position on your phone at the top.
+REM I FORMAT = "tap X Y"
+REM I   um die X und Y koordination zu erhalten aktiviere die entwickler optionen
+REM I   unter Android und aktiviere "Zeigerposition"
+REM I   Diese option zeigt die am oberen Bildschrimrand die Koordinateion
+REM I   sobald du auf den Bildschirm tippst und gedrueckt haeltst.
+REM +================================================================+
+REM I FLOOR navigation (first floor on the right of the screen)
+REM I ETAGE Navigation (erste Etage auf der rechten Seite)
+REM +================================================================+
+set base_double_down="tap 666 666"          # button with double arrow down
+set above_floor_up="tap 673 483"                   # button with arrow up
+set above_floor_down="tap 673 613"                 # button with arrow down
+REM +================================================================+
+REM I FLOOR navigation (first under ground floor
+REM I ETAGE Navigation (erste unterirdische Etage)
+REM +================================================================+
+set return_to_floor0="tap 666 400"
+set below_floor_up="tap 673 475"                   # button with arrow up
+set below_floor_down="tap 673 603"                 # button with arrow down
+set mine_buildings="tap 40 777"
+REM +================================================================+
+REM I MINE BUILIDNGS: Categories
+REM I MINEN GEBAEUDE: KATEGORIEN
+REM +================================================================+
+set normal_mines="tap 107 313"
+set chemical_mines="tap 213 313"
+set oil_stations="tap 320 313"
+REM +================================================================+
+REM I MINE BUILIDNGS: Visit Buttons
+REM I MINEN GEBAEUDE: Besuchen Knoepfe
+REM +================================================================+
+set visit1="tap 573 467"
+set visit2="tap 573 600"
+set visit3="tap 573 733"
+set visit4="tap 573 867"
+set visit5="tap 573 1000"
+REM +================================================================+
+REM I CHEMICAL MINE: Select button for Ressource
+REM I CHEMISCHE MINE: Waehlen knopf für die Rohstoffe
+REM +================================================================+
+set chemRes1="tap 573 487"
+set chemRes2="tap 573 580"
+set chemRes3="tap 573 673"
+set chemRes4="tap 573 767"
+REM +================================================================+
+REM I DRONES: Position                ( all other floors with stations are the same)
+REM I DROHNEN/BOTS: Position          ( alle produktions etagen sind hier identisch)
+REM +================================================================+
+set station1_tap="tap 173 540"
+set station2_tap="tap 300 540"
+set station3_tap="tap 433 540"
+set station4_tap="tap 547 540"
+set station5_tap="tap 173 740"
+set station6_tap="tap 300 740"
+set station7_tap="tap 433 740"
+set station8_tap="tap 547 740"
+set bot_job_cancel_tap="tap 640 1040"    # the red "x" when a bot is working. / das rote "x" wenn ein Bot aktiv ist.
+REM +================================================================+
+REM I FLOOR FUNCTIONS:                 ( the four main buttons of the floor)
+REM I ETAGEN FUNKTIONEN:               ( die vier haupt knoepfe der Etage)
+REM +================================================================+
+set action1="tap 93 1193"
+set action2="tap 280 1193"
+set action3="tap 447 1193"
+set action4="tap 647 1193"
+REM +================================================================+
+REM I DRONES: Actions entries.
+REM I DROHNEN/BOTS: Faehigkeiteneintraege
+REM +================================================================+
+REM I  FIRST PAGE:
+set collect_tap="tap 333 447"
+set smelting_tap="tap 333 543"
+set crafting_tap="tap 333 640"
+set garden_tap="tap 333 730"
+set water_tap="tap 333 803"
+REM I  SECOND PAGE AFTER SCROLLING DOWN:
+REM I  ZWEITE SEITE NACH DEM RUNTER-SCROLLEN:
+set oil_tap="tap 333 577"
+set mine_tap="tap 333 662"
+set jewel_tap="tap 333 750"
+set chemi_tap="tap 333 847"
+REM +================================================================+
+REM I DRONE ACTION: MINE RESSOURCE, first row of ressouces, lower middle of the icon.
+REM I DROHNEN/BOTS AKTION: DIREKTABBAU, Erste Reihe der Ressourcen, unteress Mittel des Icons.
+REM +================================================================+
+set select_resource_row1_left="tap 227 500"            # left
+set select_resource_middle="tap 360 500"               # middle
+set select_resource_right="tap 493 500"                # right
+REM +================================================================+
+REM I DRONE ACTION: MINE RESSOURCE, second row of ressouces, lower middle of the icon.
+REM I DROHNEN/BOTS AKTION: DIREKTABBAU, zweite Reihe der Ressourcen, unteres Mittl des Icons.
+REM +================================================================+
+set select_resource_row2_left="tap 227 682"           # left
+REM +================================================================+
+REM I CONFIRM-Dialog:
+REM I Bestaetigungsdialog:
+REM +================================================================+
+set yes_tap="tap 433 750"
+set no_tap="tap 287 750"
+REM +================================================================+
+REM I DRILL FLOOR:                        ( the four spells )
+REM I GRABEN EBENE:                       ( die vier Zauber )
+REM +================================================================+
+set ability1="tap 187 1200"
+set ability2="tap 293 1200"
+set ability3="tap 413 1200"
+set ability4="tap 527 1200"
+REM +================================================================+
+REM I FORMAT = "swipe X1 Y1 X2 Y2"
+REM I   proceed as above, X1 and Y1 are the start and X2 and Y2 the
+REM I   end point of the scroll.
+REM I FORMAT = "swipe X1 Y1 X2 Y2"
+REM I   vorgehensweise wie zuvor, X1 und Y1 markieren den start und X2 und Y2 den
+REM I   Endpunkt des Scrollvorganges.
+REM +================================================================+
+set swipe_up="swipe 333 577 333 847"
+set swipe_down="swipe 333 803 333 447"
+set swipe_mine_resource_up="swipe 353 660 353 460"
+set swipe_mine_resource_down="swipe 353 473 353 660"
+goto :continue
+REM
+REM
+REM
+REM
+REM
+REM
+REM
 REM
 REM
 REM
@@ -192,7 +335,7 @@ REM +================================================================+
 REM I Adjust only if you have multiple devices/emulators connected at the same time.
 REM I Nur anpassen wenn mehrere geraete/emulatoren zur gleichen Zeit verbunden sind.
 REM +================================================================+
-set transport_id=1
+set device=127.0.0.1:21523
 REM
 REM
 REM
@@ -215,7 +358,7 @@ REM
 REM
 REM
 REM
-set touchscreen="".\adb.exe -t %transport_id% shell input""
+set touchscreen="".\adb.exe -s %device% shell input touchscreen""
 set timeout=""timeout /t 1 ^> nul""
 REM
 if "%dtadb_lang%" NEQ "DE" (

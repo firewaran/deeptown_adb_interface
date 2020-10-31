@@ -69,5 +69,6 @@ When you done that just drag your file over the arrange_mines.cmd to execute it 
 ### other files
 File | Description
 ---- | ----
+detect_devices.cmd | handles connected devices.
 testing.cmd | used for internal testing of the different *.cmd-files
 update_env.cmd | internally used to update the load_env.cmd

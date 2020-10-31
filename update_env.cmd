@@ -7,15 +7,15 @@ set "choice=%2"
 set "newValue=%3"
 
 if %choice% EQU "" (
-  echo missing 2nd paramter "setting"
+  echo parameter 2: setting is missing
   pause
-  EXIT /B
+  EXIT
 )
 
 if %newValue% EQU "" (
-  echo missing 3rd parameter "new value"
+  echo parameter 3: new value is missing
   pause
-  EXIT /B  
+  EXIT
 )
 
 set update=false
@@ -27,9 +27,9 @@ FOR %%i IN (%config%) do (
 )
 
 if NOT EXIST %config_LocOld% (
-  echo config file %config_LocOld% could not be found.
+  echo parameter 1: config file %config_LocOld% could not be found.
   pause
-  EXIT /B  
+  EXIT
 )
 
 if EXIST %config_LocNew% (
@@ -41,7 +41,7 @@ for /f "usebackq eol=; delims=µ" %%a in (%config_LocOld%) do (
 REM analyze each line
  set update=false
  for %%b in (%%a) do (
-REM search foo a keyword   
+REM search for a keyword   
    if "%%b" EQU "%choice%" (
      set update=true
    )

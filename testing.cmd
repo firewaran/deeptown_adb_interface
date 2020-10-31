@@ -2,6 +2,8 @@
 setlocal EnableDelayedExpansion
 set script_home="%CD%"
 
+call %script_home%\detect_devices.cmd %script_home%
+
 :start
 cls
 echo.

@@ -8,19 +8,11 @@ set script_home="%CD%"
   echo +------------------------------------+
   echo I       DeepTown ADB interface       I
   echo +------------------------------------+
-
-  call .\load_env.cmd
-  adb devices -l
+  call %script_home%\detect_devices.cmd %script_home%
+  call %script_home%\load_env.cmd 
   call :restore_home
-
-  call :lng_device_selection_%dtadb_lang%
-  if %transport_id% EQU "" (
-    goto :start
-  ) else (
-    call update_env.cmd %script_home%\load_env.cmd transport_id %transport_id%
-  )  
-
 :menu
+  cls
   call :lng_main_menu_%dtadb_lang%
   call :choice%choice%
   if errorlevel 1 (
@@ -246,12 +238,6 @@ REM +==================================================+
 REM I MESSAGES AND TRANSLATION
 REM +==================================================+
 REM    ....i....1....i....2....i....3....i....4....i....5....i....6....i....7....i....8
-:lng_device_selection_EN
-  set /P transport_id=Which device you want to connect to [transport-id]:
-goto :EOF
-:lng_device_selection_DE
-  set /P transport_id=Zu welchem Geraet moechtest Du Dich verbinden [transport-id]:
-goto :EOF
 :lng_main_menu_EN
   echo +====================================+
   echo I       DeepTown ADB interface       I
@@ -350,6 +336,7 @@ REM +==================================================+
 REM I MESSAGES AND TRANSLATION              - END -
 REM +==================================================+
 
+goto :EOF  
 :restore_home
   REM +=================================================+
   REM I  Restore the current working directory          I
