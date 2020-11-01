@@ -7,8 +7,7 @@ set script_home="%CD%"
   echo.
   echo +------------------------------------+
   echo I       DeepTown ADB interface       I
-  echo +------------------------------------+
-  echo Scanning for connected android devices...
+  echo +------------------------------------+  
   call %script_home%\detect_devices.cmd %script_home%
   call %script_home%\load_env.cmd 
   call :restore_home

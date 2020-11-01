@@ -8,6 +8,7 @@ set found_devices=0
 set choosen_device=0
 
 call .\load_env.cmd 
+call :lng_scanning_devices_%dtadb_lang%
 
 :detect_device
 adb devices > %devices_list%
@@ -74,4 +75,10 @@ goto :EOF
 goto :EOF
 :lng_device_selection_DE
   set /P choosen_device=Zu welchem Geraet moechtest Du Dich verbinden:
+goto :EOF
+:lng_scanning_devices_EN
+  echo Scanning for connected android devices...
+goto :EOF
+:lng_scanning_devices_DE
+  echo Suche nach verbundenen Android Geraeten...
 goto :EOF

@@ -41,8 +41,8 @@ REM +================================================================+
 REM I Predefines Setups          ; put/remove REM at the beginning to enable/disable
 REM I Vorgefertige Einstellungen ; setzen/entf. REM am beginn einer Zeile zum aktivieren/deaktivieren.
 REM +================================================================+
-goto :720x1280
-rem goto :1080x1920_420
+rem goto :720x1280
+goto :1080x1920_420
 REM
 REM
 REM
@@ -335,7 +335,7 @@ REM +================================================================+
 REM I Adjust only if you have multiple devices/emulators connected at the same time.
 REM I Nur anpassen wenn mehrere geraete/emulatoren zur gleichen Zeit verbunden sind.
 REM +================================================================+
-set device=127.0.0.1:21523
+set device=emulator-5554
 REM
 REM
 REM
@@ -366,7 +366,7 @@ if "%dtadb_lang%" NEQ "EN" (
   echo Not supported language "%dtadb_lang%", fallback to english [EN]
   echo Nicht unterstuetze Sprache "%dtadb_lang%", setze Sprache auf Englisch [EN]
   echo.
-set dtadb_lang=DE
+  set ^dtadb_lang=EN
 ))
 REM
 Endlocal & (
