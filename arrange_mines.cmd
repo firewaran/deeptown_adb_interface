@@ -80,6 +80,8 @@ del %minesLoc%
 ren %mineLocNew% %mines_filename%
 call :lng_finished_%dtadb_lang%
 
+PAUSE
+
 goto :EOF
 REM +==================================================+
 REM I MESSAGES AND TRANSLATION

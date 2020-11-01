@@ -8,6 +8,7 @@ set script_home="%CD%"
   echo +------------------------------------+
   echo I       DeepTown ADB interface       I
   echo +------------------------------------+
+  echo Scanning for connected android devices...
   call %script_home%\detect_devices.cmd %script_home%
   call %script_home%\load_env.cmd 
   call :restore_home
@@ -24,43 +25,37 @@ set script_home="%CD%"
 goto :end
 
 :choice1
-  call :ready
   set choice=craft
   set duration=4h29m
   goto :task24h
   goto :EOF
 :choice2
-  call :ready
   set choice=smelt
   set duration=4h29m
   goto :task24h
   goto :EOF
 :choice3
-  call :ready
   set choice=garden
   set duration=4h29m
   goto :task24h
   goto :EOF
 :choice4
-  call :ready
   set choice=jewel
   set duration=2h59m
   goto :task24h
   goto :EOF
 :choice5
-  call :ready
   set duration=2h59m
   set choice=chemi
   goto :task24h
   goto :EOF
 :choice6
-  call :ready
   set duration=3h59m  
   goto :mine24h
   goto :EOF
 :choice7
   call :ready7
-  call %script_home%\arrange_mines.cmd mines_mixed.txt
+  call %script_home%\arrange_mines.cmd %choosenFile%
   goto :menu
 :choicee
   goto :end
@@ -86,12 +81,28 @@ goto :EOF
 goto :EOF
 :ready7
   echo.
-  set files=load_env.cmd, mines.txt
+  call :lng_select_mining_file_%dtadb_lang%
+  set "choosenFile="
+  set fileNo=1
+  FOR /F "tokens=*" %%a IN ('dir /b %script_home%\mines*.txt') DO (  
+    echo    [!fileNo!] : %%a 
+	set /A fileNo+=1
+  )
+  set /P choosenNo= :
+  set fileNo=1
+  FOR /F "tokens=*" %%a IN ('dir /b %script_home%\mines*.txt') DO (
+    if !fileNo! EQU %choosenNo% (
+	  set choosenFile=%%a
+	)
+    set /A fileNo+=1
+  )   
+  set files=load_env.cmd, %choosenFile%
+  echo.
   call :lng_ready_%dtadb_lang%
   PAUSE > nul
+goto :EOF
 
-goto :end
-:task24h
+:prep_commands
 REM it would be not necessary to translate the commands.
 REM but pre-prepared it looks unfinished if english words pop up in an DE environment.
   if "%dtadb_lang%" EQU "DE" (
@@ -104,6 +115,7 @@ REM but pre-prepared it looks unfinished if english words pop up in an DE enviro
 	set collect=sammeln
 	set move3=bewegen3
 	set base=basis
+    set mine=abbauen
   ) else (
     set water=water
 	set claim=claim
@@ -114,10 +126,17 @@ REM but pre-prepared it looks unfinished if english words pop up in an DE enviro
 	set collect=collect
 	set move3=move3
 	set base=base
+	set mine=mine	
   )
+
+goto :EOF
+:task24h  
   call :get_collect_bot
+  call :prep_commands
   call :calc_cycle  
-:task24hloop
+  call :ready
+  echo.
+:task24hloop  
   REM +=================================================+
   REM I  Claim Water and Oil and
   REM I  .. send bots to collect and craft
@@ -156,34 +175,12 @@ REM but pre-prepared it looks unfinished if english words pop up in an DE enviro
 
 goto :end
 :mine24h
-REM it would be not necessary to translate the commands.
-REM but pre-prepared it looks unfinished if english words pop up in an DE environment.
-  if "%dtadb_lang%" EQU "DE" (
-    set water=wasser
-	set claim=sammeln
-	set underground=untergrund
-	set oil=oel
-	set dronebay=drohnenbucht
-	set actions=aktionen
-	set collect=sammeln
-	set move3=bewegen3
-	set base=basis
-	set mine=abbauen
-  ) else (
-    set water=water
-	set claim=claim
-	set underground=underground
-	set oil=oil
-	set dronebay=dronebay
-	set actions=actions
-	set collect=collect
-	set move3=move3
-	set base=base
-	set mine=mine
-  )
   call :get_collect_bot
-  call :calc_cycle  
   call :lng_select_resource_%dtadb_lang%
+  call :prep_commands  
+  call :calc_cycle
+  call :ready
+  echo.
 :mine24hloop
   REM +=================================================+
   REM I  Claim Water and Oil and
@@ -227,11 +224,8 @@ REM but pre-prepared it looks unfinished if english words pop up in an DE enviro
 goto :EOF
 :get_collect_bot
   echo.
-  if "%dtadb_lang%" EQU "DE" (
-    set /P collecor_bot=Welche Drone soll fuer das sammeln der Ressourcen zustaendig sein:
-  ) else (
-    set /P collecor_bot=Which bot is the one to do the collect-task:
-  )
+  call :lng_collecter_bot_%dtadb_lang%
+  set /P collecor_bot=%lng_collector_bot_input%
 
 goto :EOF
 REM +==================================================+
@@ -332,6 +326,23 @@ goto :EOF
 :lng_cycle_progress_DE
   echo Zyklus !b! von %cycle%
 goto :EOF
+:lng_collecter_bot_EN
+  echo Which drone should be responsible for collecting ressources?
+  echo Choose [0] if no drone should do it.
+  set lng_collector_bot_input=Drone [0-8]:
+goto :EOF
+:lng_collecter_bot_DE
+  echo Welche Drohne soll für das Sammeln von Reesourcen zustaendig sein?
+  echo Falls es keine Drohne uebernhemen soll waehle [0].
+  set lng_collector_bot_input=Drohne [0-8]:
+goto :EOF
+:lng_select_mining_file_EN
+  echo Select a configuation file from %script_home%
+goto :EOF
+:lng_select_mining_file_DE
+  echo Waehle die Konfigurationsdatei aus %script_home%
+goto :EOF
+
 REM +==================================================+
 REM I MESSAGES AND TRANSLATION              - END -
 REM +==================================================+

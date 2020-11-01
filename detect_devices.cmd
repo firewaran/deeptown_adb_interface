@@ -18,7 +18,7 @@ for /f "usebackq skip=1 eol=; delims=µ" %%a in (%devices_list%) do (
 
 if %found_devices% EQU 0 (
   call :lng_no_devices_%dtadb_lang%
-  pause > nul
+  timeout /t 10
   goto :detect_device
 ) else (
   if %found_devices% EQU 1 (
@@ -59,11 +59,9 @@ REM +==================================================+
 REM    ....i....1....i....2....i....3....i....4....i....5....i....6....i....7....i....8
 :lng_no_devices_EN
   echo No devices connected!
-  echo Connect device/devices and press any key to retry.
 goto :EOF
 :lng_no_devices_DE
   echo Keine Geraete verbunden!
-  echo Verbinde ein oder mehrere Geraete und druecke eine beliebige Taste zum verbinden.
 goto :EOF
 :lng_multiple_devices_EN
   echo Multiple Devices found: 
