@@ -175,8 +175,8 @@ goto :EOF
 goto :end
 :mine24h
   call :get_collect_bot
-  call :lng_select_resource_%dtadb_lang%
-  call :prep_commands  
+  call %script_home%\get_input_ress.cmd %dtadb_lang%
+  call :prep_commands
   call :calc_cycle
   call :ready
   echo.
@@ -205,7 +205,7 @@ goto :end
       call %script_home%\select_bot.cmd %%b
       call %script_home%\select_func.cmd %actions%
       call %script_home%\select_action.cmd %mine%
-      call %script_home%\select_ress.cmd %choice% !skipWord!
+      call %script_home%\select_ress.cmd %input_ress% !skipWord!
 	  set skipWord=skip	
 	)
   )
@@ -297,28 +297,6 @@ goto :EOF
   echo zusaetzlich muss die %files% aktualisiert sein,
   echo weiter mit beliebiger Taste.
 goto :EOF
-:lng_select_resource_EN
-  echo Use the following names of a ressource that you like to gather directly:
-  echo     obsidian     titanium    helium
-  echo     amber        amethyst    ruby
-  echo     gold         diamond     platinum
-  echo     aluminium    topaz       coal
-  echo     copper       iron        alexandrite
-  echo     silver       uranium     emerald
-  echo     sapphire
-  set /P choice=select ressource:
-goto :EOF
-:lng_select_resource_DE
-  echo Verwende einen der folgenden Rohstoff-Namen welche Du direkt abbauen lassen moechtest:
-  echo     obsidian     titanerz    helium
-  echo     bernstein    amethyst    rubin
-  echo     gold         diamant     platin
-  echo     aluminium    topas       kohle
-  echo     kupfer       eisen       alexandrit
-  echo     silber       uran        smaragd
-  echo     saphir
-  set /P choice=Waehle Ressource:
-goto :EOF
 :lng_cycle_progress_EN
   echo Cycle !b! of %cycle%
 goto :EOF
@@ -331,7 +309,7 @@ goto :EOF
   set lng_collector_bot_input=Drone [0-8]:
 goto :EOF
 :lng_collecter_bot_DE
-  echo Welche Drohne soll für das Sammeln von Reesourcen zustaendig sein?
+  echo Welche Drohne soll fuer das Sammeln von Reesourcen zustaendig sein?
   echo Falls es keine Drohne uebernhemen soll waehle [0].
   set lng_collector_bot_input=Drohne [0-8]:
 goto :EOF

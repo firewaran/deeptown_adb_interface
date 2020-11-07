@@ -4,7 +4,7 @@ REM
 REM +================================================================+
 REM I Language / Sprache of the script output      ( DE / EN )
 REM +================================================================+
-set dtadb_lang=DE
+set dtadb_lang=EN
 REM
 REM +================================================================+
 REM I folder where the adb.exe is located

@@ -64,8 +64,14 @@ Diese Dateien sind nur Beispiele, Sie müssen sie mit Ihren aktuellen Minenspots
 
 Wenn Sie das getan haben, ziehen Sie einfach Ihre Datei über die Datei arrange_mines.cmd, um sie mit dieser Einstellung auszuführen.
 
+### create_script.cmd
+
+Interaktives Script zum erstellen Benutzerspezifischer Scripte.
+
 ### other files
 File | Beschreibung
 ---- | ----
+detect_devices.cmd | erkennen verbundener android geraete.
 testing.cmd | für interne Tests der verschiedenen *.cmd-Dateien verwendet
 update_env.cmd | intern verwendet zum aktualisieren der load_env.cmd
+get_input_ress.cmd | Eingabe von Rohstoffen abfragen und auf gueltigkeit pruefen.

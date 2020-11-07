@@ -75,7 +75,7 @@ EXIT /B
 :CASE_jewel
 :CASE_juwelen
   call :lng_jewel_%dtadb_lang%
-  %touchscreen%%swipe_down%
+  %touchscreen% %swipe_down%
   %timeout%
   %touchscreen% %jewel_tap%
   GOTO END_CASE

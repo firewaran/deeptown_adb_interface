@@ -1,3 +1,4 @@
+@echo off
 setlocal EnableDelayedExpansion
 
 set script_home=%1
@@ -8,9 +9,9 @@ set found_devices=0
 set choosen_device=0
 
 call .\load_env.cmd 
-call :lng_scanning_devices_%dtadb_lang%
 
 :detect_device
+call :lng_scanning_devices_%dtadb_lang%
 adb devices > %devices_list%
 
 for /f "usebackq skip=1 eol=; delims=µ" %%a in (%devices_list%) do ( 
@@ -20,6 +21,7 @@ for /f "usebackq skip=1 eol=; delims=µ" %%a in (%devices_list%) do (
 if %found_devices% EQU 0 (
   call :lng_no_devices_%dtadb_lang%
   timeout /t 10
+  echo.
   goto :detect_device
 ) else (
   if %found_devices% EQU 1 (
@@ -35,6 +37,7 @@ if %found_devices% EQU 0 (
       call :lng_device_selection_%dtadb_lang%
     )
   )
+
   if "%choosen_device%" NEQ "" (
     set found_devices=1
     for /f "usebackq skip=1 eol=; delims=µ" %%a in (%devices_list%) do (
@@ -45,6 +48,7 @@ if %found_devices% EQU 0 (
   	  )
       set /A found_devices+=1		
     )
+	
 	call %script_home%\update_env.cmd  %script_home%\load_env.cmd device !device!
   ) 	
 )
